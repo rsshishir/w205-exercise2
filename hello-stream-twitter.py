@@ -2,6 +2,7 @@
 Using Twitter stream API, print all the tweets in the stream containing the term "Hello" in a 1 min period
 
 """
+
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
@@ -15,9 +16,9 @@ class StdOutListener(StreamListener):
         self.inc = 0
         StreamListener.__init__(self)
         # report the start of data collection...
-        print "Gathering data at %s"%(str(ctime()))
+        #print "Gathering data at %s"%(str(ctime()))
         self.startTime = time()
-        print "Start Time = %s"%(str(ctime()))
+        #print "Start Time = %s"%(str(ctime()))
         self.timer = timer
         self.count = 0
         
@@ -30,19 +31,19 @@ class StdOutListener(StreamListener):
                 self.dataJson =simplejson.loads(data[:-1])
                 self.dataJsonText = self.dataJson["text"].lower()
                 self.count += 1
-                if "Hello" in self.dataJsonText:
-                    print self.dataJsonText
+                if "obama" in self.dataJsonText:
+                    print (self.dataJsonText)
 
             else:
-                print "Count== ",self.count
-                print "End Time = %s"%(str(ctime()))
-                print "Elapsed Time = %s"%(str(self.elapsedTime))
+                print ("Count== ",self.count)
+                print ("End Time = %s"%(str(ctime())))
+                print ("Elapsed Time = %s"%(str(self.elapsedTime)))
 
 
 
                 return False
             return True
-        except Exception, e:
+        except Exception as e:
             # Catch any unicode errors while printing to console
             # and just ignore them to avoid breaking application.
             pass
